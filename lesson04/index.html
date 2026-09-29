@@ -3,20 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Character Counter</title>
+    <style>
+
+    </style>
   </head>
   <body>
-    <input type="password" id="mat-khau" value="nongsan2026" />
-    <button type="button" id="btn-mat-khau">Hiện</button>
+    <h3>Input Field</h3>
+    <!-- Thêm maxlength="20" để giới hạn tối đa 20 ký tự -->
+    <input type="text" id="truong-nhap-lieu" maxlength="20" placeholder="Nhập văn bản..." />
+    <div id="hien-thi-so" class="counter-text">0 / 20</div>
 
     <script>
-      //logic show/hide pass
-      const oMatkhau = document.querySelector("#mat-khau");
-      const nut = document.querySelector("#btn-mat-khau");
-      nut.addEventListener("click", () => {
-        const dangAn = oMatkhau.type === "password";
-        oMatkhau.type = dangAn ? "text" : "password";
-        nut.textContent = dangAn ? "An" : "Hien";
+      const oNhap = document.querySelector("#truong-nhap-lieu");
+      const boDem = document.querySelector("#hien-thi-so");
+      const gioiHanToiDa = oNhap.getAttribute("maxlength");
+
+      // Thay "click" bằng "input" để đếm ký tự liên tục khi gõ
+      oNhap.addEventListener("input", () => {
+        // Lấy số lượng ký tự hiện tại đang có trong ô
+        const soKyTuHienTai = oNhap.value.length;
+        
+        // Cập nhật dòng text màu đỏ
+        if (soKyTuHienTai == gioiHanToiDa) {
+            boDem.textContent = `Maximum ${soKyTuHienTai} / ${gioiHanToiDa}`;
+        } else {
+            boDem.textContent = `${soKyTuHienTai} / ${gioiHanToiDa}`;
+        }
       });
     </script>
   </body>
