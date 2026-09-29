@@ -23,7 +23,6 @@ input[type="text"] {
 }
 textarea {
   height: 80px;
-  resize: vertical;
 }
 .counter {
   margin-top: 6px;
