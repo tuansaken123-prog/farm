@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character Counter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 400px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 18px;
+      }
+      textarea,
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      textarea {
+        height: 80px;
+        resize: vertical;
+      }
+      .counter {
+        margin-top: 6px;
+        color: red;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Textarea Block -->
+    <div class="form-group">
+      <label for="my-textarea">Textarea</label>
+      <textarea id="my-textarea" maxlength="140"></textarea>
+      <div id="counter-textarea" class="counter">Max 0 / 140</div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0" />
+
+    <!-- 2. Input Field Block -->
+    <div class="form-group">
+      <label for="my-input">Input Field</label>
+      <input type="text" id="my-input" maxlength="20" placeholder="Nhập" />
+      <div id="counter-input" class="counter">Maximum 0 / 20</div>
+    </div>
+
+    <script>
+      // Xử lý đếm ký tự cho Textarea
+      const oTextarea = document.querySelector("#my-textarea");
+      const demTextarea = document.querySelector("#counter-textarea");
+      const maxTextarea = 140;
+
+      oTextarea.addEventListener("input", () => {
+        const doDai = oTextarea.value.length;
+        demTextarea.textContent = `Max ${doDai} / ${maxTextarea}`;
+      });
+
+      // Xử lý đếm ký tự cho Input Field
+      const oInput = document.querySelector("#my-input");
+      const demInput = document.querySelector("#counter-input");
+      const maxInput = 20;
+
+      oInput.addEventListener("input", () => {
+        const doDai = oInput.value.length;
+        demInput.textContent = `Maximum ${doDai} / ${maxInput}`;
+      });
+    </script>
+  </body>
+</html>
