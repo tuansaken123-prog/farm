@@ -75,17 +75,13 @@
   <body>
     <div class="box">
       <h2>Danh Sách Đi Chợ</h2>
-
-      <!-- Nhập món -->
       <form id="form">
         <input type="text" id="o-ten" placeholder="Nhập tên món + Enter..." />
         <button type="submit">Thêm</button>
       </form>
 
-      <!-- Danh sách món -->
       <ul id="ds"></ul>
 
-      <!-- Số món chưa mua -->
       <div id="thong-ke">Còn 0/0 món chưa mua</div>
     </div>
 
@@ -95,7 +91,6 @@
       const ds = document.querySelector("#ds");
       const thongKe = document.querySelector("#thong-ke");
 
-      // Cập nhật số lượng món
       function capNhat() {
         const dsMon = ds.querySelectorAll("li");
         let chuaMua = 0;
@@ -109,13 +104,11 @@
         thongKe.textContent = `Còn ${chuaMua}/${dsMon.length} món chưa mua`;
       }
 
-      // Thêm món vào danh sách
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const ten = oTen.value.trim();
 
-        // Không cho thêm tên rỗng
         if (ten === "") {
           return;
         }
@@ -123,13 +116,11 @@
         const li = document.createElement("li");
         li.textContent = ten;
 
-        // Bấm 1 lần để đánh dấu đã mua
         li.addEventListener("click", () => {
           li.classList.toggle("completed");
           capNhat();
         });
 
-        // Nháy đúp để xóa món
         li.addEventListener("dblclick", () => {
           li.remove();
           capNhat();
