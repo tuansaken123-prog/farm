@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách đi chợ</title>
+    <style>
+      body {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      .box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+      }
+
+      button {
+        padding: 8px 16px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      #ds {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+      }
+
+      #ds li {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.2s;
+      }
+
+      #ds li:hover {
+        background-color: #f1f1f1;
+      }
+
+      /* Hiệu ứng gạch ngang khi đã mua */
+      .completed {
+        text-decoration: line-through;
+        color: #888;
+      }
+
+      #thong-ke {
+        font-weight: bold;
+        color: #333;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Danh Sách Đi Chợ</h2>
+      <form id="form">
+        <input type="text" id="o-ten" placeholder="Nhập tên món + Enter..." autocomplete="off" />
+        <button type="submit">Thêm</button>
+      </form>
+
+      <ul id="ds"></ul>
+
+      <div id="thong-ke">Còn 0/0 món chưa mua</div>
+    </div>
+
+    <script>
+      const form = document.querySelector("#form");
+      const oTen = document.querySelector("#o-ten");
+      const ds = document.querySelector("#ds");
+      const thongKe = document.querySelector("#thong-ke");
+
+      // Hàm cập nhật trạng thái hiển thị "Còn x/y món chưa mua"
+      function capNhatThongKe() {
+        const tatCaLi = ds.querySelectorAll("li");
+        const tongSo = tatCaLi.length;
+
+        // Đếm các món chưa được đánh dấu (chưa mua)
+        let chuaMua = 0;
+        tatCaLi.forEach((li) => {
+          if (!li.classList.contains("completed")) {
+            chuaMua++;
+          }
+        });
+
+        thongKe.textContent = `Còn ${chuaMua}/${tongSo} món chưa mua`;
+      }
+
+      // Xử lý thêm món
+      form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Không cho trang tải lại
+        const ten = oTen.value.trim();
+        if (ten === "") return; // Nếu rỗng thì bỏ qua
+
+        const li = document.createElement("li");
+        li.textContent = ten;
+
+        // 1. Click 1 lần: đánh dấu đã mua hoặc bỏ đánh dấu
+        li.addEventListener("click", () => {
+          li.classList.toggle("completed");
+          capNhatThongKe();
+        });
+
+        // 2. Nháy đúp (dblclick): xóa món đi
+        li.addEventListener("dblclick", () => {
+          li.remove();
+          capNhatThongKe();
+        });
+
+        ds.append(li);
+
+        oTen.value = ""; // Clear input
+        oTen.focus(); // Trỏ chuột lại ô nhập
+
+        capNhatThongKe(); // Cập nhật lại số liệu thống kê
+      });
+    </script>
+  </body>
+</html>
