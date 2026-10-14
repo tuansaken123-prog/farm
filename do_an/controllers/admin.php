@@ -1,9 +1,41 @@
 <?php
 $act = $_REQUEST['act'] ?? 'orders';
 
-// Bỏ qua đăng nhập -> Vào thẳng trang quản trị
+// --- 1. XỬ LÝ ĐĂNG NHẬP ---
+if ($act === 'login') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = trim($_POST['username'] ?? '');
+        $password = trim($_POST['password'] ?? '');
 
-// --- QUẢN LÝ ĐƠN HÀNG & CẬP NHẬT TRẠNG THÁI ---
+        // Kiểm tra đăng nhập với tài khoản admin / 123
+        if ($username === 'admin' && $password === '123') {
+            $_SESSION['admin_logged'] = true;
+            $_SESSION['admin_user'] = 'admin';
+            header("Location: index.php?mod=admin&act=orders");
+            exit;
+        } else {
+            $error = "Tài khoản hoặc mật khẩu không chính xác!";
+        }
+    }
+    require_once __DIR__ . '/../views/admin/login.php';
+    exit;
+}
+
+// --- 2. BẮT BỘC ĐĂNG NHẬP (Chưa đăng nhập sẽ bị đẩy về trang Login) ---
+if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true) {
+    header("Location: index.php?mod=admin&act=login");
+    exit;
+}
+
+// --- 3. XỬ LÝ ĐĂNG XUẤT ---
+if ($act === 'logout') {
+    unset($_SESSION['admin_logged']);
+    unset($_SESSION['admin_user']);
+    header("Location: index.php?mod=admin&act=login");
+    exit;
+}
+
+// --- 4. QUẢN LÝ ĐƠN HÀNG & CẬP NHẬT TRẠNG THÁI ---
 if ($act === 'orders') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
         $order_id = $_POST['order_id'];
@@ -17,7 +49,7 @@ if ($act === 'orders') {
     require_once __DIR__ . '/../views/admin/orders.php';
 }
 
-// --- QUẢN LÝ MÓN (CRUD) ---
+// --- 5. QUẢN LÝ MÓN (CRUD: Thêm & Xóa món) ---
 elseif ($act === 'products') {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
         $name = $_POST['name'];
@@ -40,7 +72,7 @@ elseif ($act === 'products') {
     require_once __DIR__ . '/../views/admin/products.php';
 }
 
-// --- THỐNG KÊ ---
+// --- 6. THỐNG KÊ DOANH THU (Theo tuần & tháng) ---
 elseif ($act === 'stats') {
     $stmtWeek = $pdo->query("
         SELECT DATE(created_at) as date, COUNT(*) as total_orders, SUM(total_price) as revenue 
