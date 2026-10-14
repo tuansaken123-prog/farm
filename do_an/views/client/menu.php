@@ -25,14 +25,14 @@
     body {
         background-color: var(--bg);
         color: var(--text);
-        padding-bottom: 50px;
+        padding-bottom: 30px;
     }
 
-    /* Navigation */
+    /* Navbar */
     .navbar {
         background: #fff;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        padding: 15px 8%;
+        padding: 15px 5%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -42,7 +42,7 @@
     }
 
     .logo {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: bold;
         color: var(--primary);
         text-decoration: none;
@@ -53,120 +53,96 @@
         color: var(--text);
         font-weight: 600;
         margin-left: 20px;
-        transition: 0.2s;
+        font-size: 14px;
     }
 
-    .nav-links a:hover,
     .nav-links a.active {
         color: var(--primary);
     }
 
-    /* Container */
+    /* Main Layout 2 Cột */
     .container {
-        max-width: 1100px;
-        margin: 30px auto;
+        max-width: 1200px;
+        margin: 25px auto;
         padding: 0 20px;
     }
 
-    /* Search Section */
+    /* Search Box */
     .search-box {
         display: flex;
         justify-content: center;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .search-box input {
-        width: 60%;
-        max-width: 400px;
-        padding: 12px 18px;
+        width: 100%;
+        max-width: 450px;
+        padding: 10px 18px;
         border: 2px solid var(--accent);
-        border-radius: 25px 0 0 25px;
+        border-radius: 20px 0 0 20px;
         outline: none;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .search-box button {
-        padding: 12px 25px;
+        padding: 10px 22px;
         background: var(--primary);
         color: #fff;
         border: none;
-        border-radius: 0 25px 25px 0;
+        border-radius: 0 20px 20px 0;
         cursor: pointer;
         font-weight: bold;
-        transition: 0.2s;
     }
 
-    .search-box button:hover {
-        background: var(--primary-hover);
+    .main-layout {
+        display: grid;
+        grid-template-columns: 2.2fr 1fr;
+        gap: 25px;
+        align-items: start;
     }
 
-    /* Product Grid */
-    .section-title {
-        font-size: 22px;
-        margin-bottom: 20px;
-        text-align: center;
-        color: var(--text);
-        position: relative;
-    }
-
-    .section-title::after {
-        content: '';
-        display: block;
-        width: 50px;
-        height: 3px;
-        background: var(--primary);
-        margin: 8px auto 0;
-        border-radius: 2px;
-    }
-
+    /* Cột bên trái: Danh sách sản phẩm */
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        gap: 20px;
-        margin-bottom: 40px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
     }
 
     .card {
         background: var(--card-bg);
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         border: 1px solid #f0e6e1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        height: 180px;
     }
 
     .card-title {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: bold;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
         color: #2c2221;
     }
 
     .card-desc {
-        font-size: 13px;
+        font-size: 12px;
         color: #7a6e6c;
-        margin-bottom: 12px;
-        height: 36px;
+        margin-bottom: 10px;
+        line-height: 1.3;
         overflow: hidden;
-        text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
 
     .card-price {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         color: var(--primary);
-        margin-bottom: 15px;
+        margin-bottom: 8px;
     }
 
     .qty-box {
@@ -174,78 +150,94 @@
         align-items: center;
         justify-content: space-between;
         background: #fdf5f2;
-        padding: 6px 12px;
-        border-radius: 8px;
+        padding: 4px 10px;
+        border-radius: 6px;
     }
 
     .qty-box label {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
     }
 
     .qty-box input {
-        width: 50px;
-        padding: 5px;
+        width: 45px;
+        padding: 3px;
         text-align: center;
         border: 1px solid #e0d0c8;
-        border-radius: 6px;
+        border-radius: 4px;
         font-weight: bold;
         outline: none;
     }
 
-    /* Order Form */
-    .order-container {
+    /* Cột bên phải: Form Đặt Hàng Cố Định (Sticky) */
+    .order-sidebar {
         background: var(--card-bg);
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         border: 1px solid #f0e6e1;
-        max-width: 600px;
-        margin: 0 auto;
+        position: sticky;
+        top: 80px;
+    }
+
+    .sidebar-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+        color: var(--primary);
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8px;
     }
 
     .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 12px;
     }
 
     .form-group label {
         display: block;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .form-group input,
     .form-group textarea {
         width: 100%;
-        padding: 10px 14px;
+        padding: 8px 12px;
         border: 1px solid #e0d0c8;
-        border-radius: 8px;
+        border-radius: 6px;
         outline: none;
-        font-size: 14px;
-        transition: border-color 0.2s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        border-color: var(--primary);
+        font-size: 13px;
     }
 
     .btn-submit {
         width: 100%;
-        padding: 14px;
+        padding: 12px;
         background: var(--primary);
         color: #fff;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         border: none;
-        border-radius: 8px;
+        border-radius: 6px;
         cursor: pointer;
         transition: 0.2s;
+        margin-top: 10px;
     }
 
     .btn-submit:hover {
         background: var(--primary-hover);
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+        .main-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .order-sidebar {
+            position: static;
+        }
     }
     </style>
 </head>
@@ -271,40 +263,45 @@
         </form>
 
         <form method="POST" action="index.php?mod=client&act=order">
-            <h2 class="section-title">DANH SÁCH ĐỒ UỐNG</h2>
-            <div class="grid">
-                <?php foreach ($products as $p): ?>
-                <div class="card">
-                    <div>
-                        <div class="card-title"><?= htmlspecialchars($p['name']) ?></div>
-                        <div class="card-desc"><?= htmlspecialchars($p['description']) ?></div>
-                    </div>
-                    <div>
-                        <div class="card-price"><?= number_format($p['price']) ?> VNĐ</div>
-                        <div class="qty-box">
-                            <label>Số lượng:</label>
-                            <input type="number" name="quantities[<?= $p['id'] ?>]" value="0" min="0">
+            <div class="main-layout">
+                <!-- Cột Trái: Danh sách Món -->
+                <div>
+                    <div class="grid">
+                        <?php foreach ($products as $p): ?>
+                        <div class="card">
+                            <div>
+                                <div class="card-title"><?= htmlspecialchars($p['name']) ?></div>
+                                <div class="card-desc"><?= htmlspecialchars($p['description']) ?></div>
+                            </div>
+                            <div>
+                                <div class="card-price"><?= number_format($p['price']) ?> VNĐ</div>
+                                <div class="qty-box">
+                                    <label>Số lượng:</label>
+                                    <input type="number" name="quantities[<?= $p['id'] ?>]" value="0" min="0">
+                                </div>
+                            </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-                <?php endforeach; ?>
-            </div>
 
-            <div class="order-container">
-                <h2 class="section-title" style="margin-bottom: 25px;">THÔNG TIN GIAO HÀNG</h2>
-                <div class="form-group">
-                    <label>Họ và Tên Khách Hàng:</label>
-                    <input type="text" name="customer_name" required placeholder="Nhập tên của bạn">
+                <!-- Cột Phải: Form Đặt Hàng -->
+                <div class="order-sidebar">
+                    <div class="sidebar-title">🛒 THÔNG TIN GIAO HÀNG</div>
+                    <div class="form-group">
+                        <label>Họ và Tên Khách Hàng:</label>
+                        <input type="text" name="customer_name" required placeholder="Nhập tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label>Số Điện Thoại:</label>
+                        <input type="text" name="customer_phone" required placeholder="Nhập SĐT để tra cứu">
+                    </div>
+                    <div class="form-group">
+                        <label>Địa Chỉ Giao Hàng:</label>
+                        <textarea name="address" rows="3" required placeholder="Nhập địa chỉ nhận hàng"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">XÁC NHẬN ĐẶT HÀNG</button>
                 </div>
-                <div class="form-group">
-                    <label>Số Điện Thoại:</label>
-                    <input type="text" name="customer_phone" required placeholder="Nhập số điện thoại để tra cứu">
-                </div>
-                <div class="form-group">
-                    <label>Địa Chỉ Giao Hàng:</label>
-                    <textarea name="address" rows="3" required placeholder="Nhập địa chỉ nhận hàng"></textarea>
-                </div>
-                <button type="submit" class="btn-submit">XÁC NHẬN ĐẶT HÀNG</button>
             </div>
         </form>
     </div>
