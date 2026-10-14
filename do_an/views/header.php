@@ -36,7 +36,6 @@ $act = $_REQUEST['act'] ?? 'menu';
         padding-bottom: 30px;
     }
 
-    /* 2. Cố định kích thước & vị trí Header tuyệt đối */
     .navbar {
         background: #fff;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
