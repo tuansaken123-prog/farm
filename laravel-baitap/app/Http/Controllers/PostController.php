@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log; // 1. Import Facade Log
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -24,7 +25,7 @@ class PostController extends Controller
         return view('post_detail', compact('post'));
     }
 
-    // 3. Hiển thị form tạo bài viết mới (HÀM CẦN BỔ SUNG)
+    // 3. Hiển thị form tạo bài viết mới
     public function create()
     {
         return view('post_create');
@@ -49,12 +50,19 @@ class PostController extends Controller
             $imagePath = $request->file('image')->store('uploads', 'public');
         }
 
-        Post::create([
+        $post = Post::create([
             'user_id'   => Auth::id(), // Tự động lấy ID người dùng đang đăng nhập
             'title'     => $request->title,
             'slug'      => Str::slug($request->title),
             'content'   => $request->content,
             'file_path' => $imagePath,
+        ]);
+
+        // Ghi Log khi tạo bài viết thành công
+        Log::info('Post created successfully', [
+            'user_id' => Auth::id(),
+            'post_id' => $post->id,
+            'title'   => $post->title
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Thêm bài viết thành công!');
@@ -66,6 +74,10 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         if (Gate::denies('manage-post', $post)) {
+            Log::warning('Unauthorized access attempt to edit post', [
+                'user_id' => Auth::id(),
+                'post_id' => $id
+            ]);
             abort(403, 'Bạn không có quyền chỉnh sửa bài viết này!');
         }
 
@@ -78,6 +90,10 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         if (Gate::denies('manage-post', $post)) {
+            Log::warning('Unauthorized access attempt to update post', [
+                'user_id' => Auth::id(),
+                'post_id' => $id
+            ]);
             abort(403, 'Bạn không có quyền cập nhật bài viết này!');
         }
 
@@ -101,6 +117,12 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->save();
 
+        // Ghi Log khi cập nhật thành công
+        Log::info('Post updated successfully', [
+            'user_id' => Auth::id(),
+            'post_id' => $post->id
+        ]);
+
         return redirect()->route('posts.index')->with('success', 'Cập nhật bài viết thành công!');
     }
 
@@ -110,6 +132,11 @@ class PostController extends Controller
         $post = Post::withTrashed()->findOrFail($id);
 
         if (Gate::denies('manage-post', $post)) {
+            Log::warning('Unauthorized access attempt to delete post', [
+                'user_id' => Auth::id(),
+                'post_id' => $id
+            ]);
+
             if ($request->ajax()) {
                 return response()->json(['error' => 'Bạn không có quyền xóa bài viết này!'], 403);
             }
@@ -119,9 +146,11 @@ class PostController extends Controller
         if ($post->trashed()) {
             $post->forceDelete();
             $message = 'Đã xóa vĩnh viễn bài viết khỏi cơ sở dữ liệu!';
+            Log::warning('Post permanently deleted', ['user_id' => Auth::id(), 'post_id' => $id]);
         } else {
             $post->delete();
             $message = 'Đã xóa mềm bài viết!';
+            Log::info('Post soft deleted', ['user_id' => Auth::id(), 'post_id' => $id]);
         }
 
         if ($request->ajax()) {

@@ -14,6 +14,10 @@
         <div class="mb-3">
             <label class="form-label">Mật khẩu</label>
             <input type="password" name="password" class="form-control">
+            <!-- Thêm đường dẫn Quên mật khẩu tại đây -->
+            <div class="text-end mt-1">
+                <a href="{{ route('password.request') }}" class="text-decoration-none small">Quên mật khẩu?</a>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
     </form>
