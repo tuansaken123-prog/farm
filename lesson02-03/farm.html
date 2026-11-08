@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <!-- Gõ: b4-$ + Tab → khung trang Bootstrap 4 đầy đủ (meta, link CSS, script JS) -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Nông Sản Sạch - Bootstrap 4</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- 1. NAVBAR — Gõ: b4-navbar → chọn mẫu navbar trong danh sách gợi ý -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <a class="navbar-brand" href="#">Nông Sản Sạch</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#menu"
+        aria-controls="menu"
+        aria-expanded="false"
+        aria-label="Mở menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a class="nav-link" href="#">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#san-pham">Sản phẩm</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bang-gia">Bảng giá</a></li>
+          <li class="nav-item"><a class="nav-link" href="#lien-he">Liên hệ</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 2. BANNER — Gõ: b4-jumbotron -->
+    <div class="jumbotron jumbotron-fluid bg-light">
+      <div class="container">
+        <h1 class="display-4">Từ ruộng đến bàn ăn</h1>
+        <p class="lead">Rau củ quả VietGAP, giao tận nhà trong ngày.</p>
+      </div>
+    </div>
+
+    <main class="container">
+      <!-- 3. LƯỚI SẢN PHẨM — Gõ: b4-grid / b4-row / b4-col, rồi b4-card trong mỗi cột -->
+      <section id="san-pham" class="mb-5">
+        <h2 class="mb-4">Sản phẩm</h2>
+        <div class="row">
+          <!-- col-12: điện thoại 1 cột | col-sm-6: 2 cột | col-lg-4: 3 cột -->
+          <div class="col-12 col-sm-6 col-lg-4 mb-4">
+            <div class="card h-100">
+              <img src="images/rau-cai.jpg" class="card-img-top" alt="Rau cải hữu cơ" />
+              <div class="card-body">
+                <h5 class="card-title">Rau cải hữu cơ</h5>
+                <p class="card-text text-success font-weight-bold">25.000đ / bó</p>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  data-target="#xacNhan"
+                >
+                  Đặt hàng
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 mb-4">
+            <div class="card h-100">
+              <img src="images/ca-chua.jpg" class="card-img-top" alt="Cà chua VietGAP" />
+              <div class="card-body">
+                <h5 class="card-title">Cà chua VietGAP</h5>
+                <p class="card-text text-success font-weight-bold">30.000đ / kg</p>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  data-target="#xacNhan"
+                >
+                  Đặt hàng
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 mb-4">
+            <div class="card h-100">
+              <img src="images/khoai-lang.jpg" class="card-img-top" alt="Khoai lang mật" />
+              <div class="card-body">
+                <h5 class="card-title">Khoai lang mật</h5>
+                <p class="card-text text-success font-weight-bold">35.000đ / kg</p>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  data-target="#xacNhan"
+                >
+                  Đặt hàng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. BẢNG GIÁ — Gõ: b4-table -->
+      <section id="bang-gia" class="mb-5">
+        <h2 class="mb-4">Bảng giá</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn vị</th>
+                <th class="text-right">Giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rau cải</td>
+                <td>Bó</td>
+                <td class="text-right">25.000đ</td>
+              </tr>
+              <tr>
+                <td>Cà chua</td>
+                <td>Kg</td>
+                <td class="text-right">30.000đ</td>
+              </tr>
+              <tr>
+                <td>Khoai lang</td>
+                <td>Kg</td>
+                <td class="text-right">35.000đ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. FORM — Gõ: b4-form-group (mỗi ô nhập 1 lần) -->
+      <section id="lien-he" class="mb-5">
+        <h2 class="mb-4">Liên hệ</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <form action="#" method="post">
+              <div class="form-group">
+                <label for="ho-ten">Họ tên <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="ho-ten" name="ho_ten" required />
+              </div>
+              <div class="form-group">
+                <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="sdt" name="sdt" required />
+              </div>
+              <div class="form-group">
+                <label for="ghi-chu">Ghi chú</label>
+                <textarea class="form-control" id="ghi-chu" name="ghi_chu" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success">Gửi</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 6. FOOTER -->
+    <footer class="bg-dark text-light text-center py-3">
+      <small>&copy; 2026 Nông Sản Sạch</small>
+    </footer>
+
+    <!-- 7. MODAL xác nhận — Gõ: b4-modal -->
+    <div class="modal fade" id="xacNhan" tabindex="-1" aria-labelledby="xacNhanTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="xacNhanTitle">Xác nhận đặt hàng</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Bạn có chắc muốn thêm sản phẩm này vào đơn hàng?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+            <button type="button" class="btn btn-success">Đồng ý</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 4 cần jQuery TRƯỚC, rồi mới đến bootstrap.bundle (đã gồm Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

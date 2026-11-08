@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách đi chợ</title>
+
+    <style>
+      body {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+      }
+
+      .box {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px #ddd;
+      }
+
+      form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 8px 15px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #ds {
+        list-style: none;
+        padding: 0;
+      }
+
+      #ds li {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+      }
+
+      #ds li:hover {
+        background: #f1f1f1;
+      }
+
+      .completed {
+        text-decoration: line-through;
+        color: #888;
+      }
+
+      #thong-ke {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">
+      <h2>Danh Sách Đi Chợ</h2>
+      <form id="form">
+        <input type="text" id="o-ten" placeholder="Nhập tên món + Enter..." />
+        <button type="submit">Thêm</button>
+      </form>
+
+      <ul id="ds"></ul>
+
+      <div id="thong-ke">Còn 0/0 món chưa mua</div>
+    </div>
+
+    <script>
+      const form = document.querySelector("#form");
+      const oTen = document.querySelector("#o-ten");
+      const ds = document.querySelector("#ds");
+      const thongKe = document.querySelector("#thong-ke");
+
+      function capNhat() {
+        const dsMon = ds.querySelectorAll("li");
+        let chuaMua = 0;
+
+        dsMon.forEach((mon) => {
+          if (!mon.classList.contains("completed")) {
+            chuaMua++;
+          }
+        });
+
+        thongKe.textContent = `Còn ${chuaMua}/${dsMon.length} món chưa mua`;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const ten = oTen.value.trim();
+
+        if (ten === "") {
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = ten;
+
+        li.addEventListener("click", () => {
+          li.classList.toggle("completed");
+          capNhat();
+        });
+
+        li.addEventListener("dblclick", () => {
+          li.remove();
+          capNhat();
+        });
+
+        ds.append(li);
+
+        oTen.value = "";
+        oTen.focus();
+
+        capNhat();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character Counter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 1. Textarea Block -->
+    <div class="form-group">
+      <label for="my-textarea">Textarea</label>
+      <textarea id="my-textarea" maxlength="140"></textarea>
+      <div id="counter-textarea" class="counter">Max 0 / 140</div>
+    </div>
+
+    <!-- 2. Input Field Block -->
+    <div class="form-group">
+      <label for="my-input">Input Field</label>
+      <input type="text" id="my-input" maxlength="20" placeholder="Nhập" />
+      <div id="counter-input" class="counter">Maximum 0 / 20</div>
+    </div>
+
+    <script>
+      // Xử lý đếm ký tự cho Textarea
+      const oTextarea = document.querySelector("#my-textarea");
+      const demTextarea = document.querySelector("#counter-textarea");
+      const maxTextarea = 140;
+
+      oTextarea.addEventListener("input", () => {
+        const doDai = oTextarea.value.length;
+        demTextarea.textContent = `Max ${doDai} / ${maxTextarea}`;
+      });
+
+      const oInput = document.querySelector("#my-input");
+      const demInput = document.querySelector("#counter-input");
+      const maxInput = 20;
+
+      oInput.addEventListener("input", () => {
+        const doDai = oInput.value.length;
+        demInput.textContent = `Maximum ${doDai} / ${maxInput}`;
+      });
+    </script>
+  </body>
+</html>

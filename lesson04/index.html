@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character Counter</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <h3>Input Field</h3>
+    <!-- Thêm maxlength="20" để giới hạn tối đa 20 ký tự -->
+    <input type="text" id="truong-nhap-lieu" maxlength="20" placeholder="Nhập văn bản..." />
+    <div id="hien-thi-so" class="counter-text">0 / 20</div>
+
+    <script>
+      const oNhap = document.querySelector("#truong-nhap-lieu");
+      const boDem = document.querySelector("#hien-thi-so");
+      const gioiHanToiDa = oNhap.getAttribute("maxlength");
+
+      // Thay "click" bằng "input" để đếm ký tự liên tục khi gõ
+      oNhap.addEventListener("input", () => {
+        // Lấy số lượng ký tự hiện tại đang có trong ô
+        const soKyTuHienTai = oNhap.value.length;
+        
+        // Cập nhật dòng text màu đỏ
+        if (soKyTuHienTai == gioiHanToiDa) {
+            boDem.textContent = `Maximum ${soKyTuHienTai} / ${gioiHanToiDa}`;
+        } else {
+            boDem.textContent = `${soKyTuHienTai} / ${gioiHanToiDa}`;
+        }
+      });
+    </script>
+  </body>
+</html>
